@@ -9,31 +9,63 @@ GAME RULES:
 
 */
 
-var scores, roundscore, activePlayer, dice;
+var scores, roundscore, activePlayer;
 
 scores = [0,0];
 roundscore = 0;
 activePlayer = 1;
 
-dice = Math.floor(Math.random() * 6) + 1;
 
-console.log(dice);
+
+//console.log(dice);
 
 
 //Assign the value(Setter)
-document.querySelector('#current-' + activePlayer).textContent = dice;
+//document.querySelector('#current-' + activePlayer).textContent = dice;
 
 // setting text with HTML
 //document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '<em>';
 
 
 //Storing  and reading the value(Getter)
-var x = document.querySelector('#score-0').textContent;
-console.log(x);
+//var x = document.querySelector('#score-0').textContent;
+//console.log(x);
 
 // setting text with CSS
 
 document.querySelector('.dice').style.display = 'none';
+
+
+//function btn(){
+
+
+//}
+
+//btn();
+//function that we pass in another function called callback function 
+
+// document.querySelector('#btn-roll').addEventListener('click', btn);
+
+// function that doesnot have a name and cannot be used outside called anoymous function
+
+document.querySelector('.btn-roll').addEventListener('click', function() {
+
+    // Random number
+    var dice = Math.floor(Math.random() * 6) + 1;
+
+    //display the reult 
+
+    var diceDOM = document.querySelector('.dice');
+    diceDOM.style.display = 'block';
+    diceDOM.src = 'dice-' + dice + ".png";
+
+
+    // Update the round score if the rolled numner was not a 1
+
+
+
+
+});
 
 
 
