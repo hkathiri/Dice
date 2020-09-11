@@ -9,11 +9,11 @@ GAME RULES:
 
 */
 
-var scores, roundscore, activePlayer;
+var scores, roundScore, activePlayer;
 
 scores = [0,0];
-roundscore = 0;
-activePlayer = 1;
+roundScore = 0;
+activePlayer = 0;
 
 
 
@@ -34,7 +34,10 @@ activePlayer = 1;
 // setting text with CSS
 
 document.querySelector('.dice').style.display = 'none';
-
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
 
 //function btn(){
 
@@ -61,6 +64,16 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
 
     // Update the round score if the rolled numner was not a 1
+    if(dice !== 1){
+// Add score
+        roundScore += dice;
+        document.querySelector('#current-' + activePlayer).textContent = roundScore;
+
+    }else {
+
+        nextPlayer();
+
+    }
 
 
 
@@ -69,5 +82,53 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
 
 
+document.querySelector('.btn-hold').addEventListener('click', function(){
+
+    //Add current score to global score 
+
+    scores[activePlayer] += roundScore;
 
 
+
+    //update the UI
+document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer]
+
+if(scores[activePlayer]>=20){
+
+    document.querySelector('#name-' + activePlayer).textContent = 'Winner';
+    document.querySelector('.dice').style.display = 'none';
+    document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+    document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+    
+
+} else{
+    nextPlayer();
+}
+
+
+    //check if Player won the game
+
+
+});
+
+
+
+
+function nextPlayer(){
+//ternary operator 
+activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+roundScore = 0;
+
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
+
+document.querySelector('.player-0-panel').classList.toggle('active');
+document.querySelector('.player-1-panel').classList.toggle('active');
+
+document.querySelector('.dice').style.display = 'none';
+
+
+//document.querySelector('.player-0-panel').classList.remove('active');
+//document.querySelector('.player-1-panel').classList.add('active');
+
+}
